@@ -1,7 +1,9 @@
 import axios from 'axios';
 
-// Get base URL from environment or default to local backend
-const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+// Get base URL from environment or default to your deployed Vercel backend API
+let rawBaseURL = import.meta.env.VITE_API_BASE_URL || 'https://jobportal-backend-api.vercel.app/api';
+rawBaseURL = rawBaseURL.replace(/\/+$/, '');
+const baseURL = rawBaseURL.endsWith('/api') ? rawBaseURL : `${rawBaseURL}/api`;
 
 const api = axios.create({
   baseURL,
